@@ -5,6 +5,7 @@ import log from './utils/logger';
 import { routerContext } from './routes/routerContext';
 
 const app = express();
+app.use(express.json());
 dbContext.connectDatabase();
 routerContext.registerRoutes(app);
 

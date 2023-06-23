@@ -1,6 +1,7 @@
 import { Express, Request, Response, NextFunction } from 'express';
 import healthCheckRouter from './healthCheck.routes';
 import log from '../utils/logger';
+import userRouter from './user.routes';
 
 const logRequestAndResponse = (req: Request, res: Response, next: NextFunction) => {
     /** Log the request */
@@ -15,6 +16,7 @@ const logRequestAndResponse = (req: Request, res: Response, next: NextFunction) 
 const registerRoutes = (expressApp: Express) => {
     expressApp.use(logRequestAndResponse);
     expressApp.use(healthCheckRouter);
+    expressApp.use(userRouter);
 };
 export const routerContext = {
     registerRoutes

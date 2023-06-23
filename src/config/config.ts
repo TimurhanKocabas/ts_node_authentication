@@ -9,6 +9,12 @@ const MONGO_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@localhost:27017
 
 const LOG_LEVEL = process.env.LOG_LEVEL;
 
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = process.env.SMTP_PORT;
+const SMTP_SECURE = process.env.SMTP_SECURE;
+
 export const config = {
     server: {
         port: SERVER_PORT
@@ -18,5 +24,12 @@ export const config = {
     },
     logging: {
         level: LOG_LEVEL
+    },
+    smtp: {
+        user: SMTP_USER,
+        pass: SMTP_PASS,
+        host: SMTP_HOST,
+        port: SMTP_PORT,
+        secure: SMTP_SECURE
     }
 };
