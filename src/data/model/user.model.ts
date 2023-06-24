@@ -5,15 +5,12 @@ import log from '../../utils/logger';
 
 export const privateFields = ['password', '__v', 'verificationCode', 'passwordResetCode', 'verified'];
 
-@pre<User>('save', async function (this: DocumentType<User>) {
+@pre<User>('save', async function () {
     if (!this.isModified('password')) {
         return;
     }
-
     const hash = await argon2.hash(this.password);
-
     this.password = hash;
-
     return;
 })
 @index({ email: 1 })

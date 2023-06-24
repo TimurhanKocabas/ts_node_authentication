@@ -1,13 +1,33 @@
 import UserModel, { User } from '../model/user.model';
 
-export function createUser(input: Partial<User>) {
+async function createUser(input: Partial<User>) {
     return UserModel.create(input);
 }
 
-export function findUserById(id: string) {
+async function findUserById(id: string) {
     return UserModel.findById(id);
 }
 
-export function findUserByEmail(email: string) {
-    return UserModel.findOne({ email });
+async function findUserByEmail(email: string) {
+    return await UserModel.findOne({ email });
 }
+
+async function updateResetToken(id: string, passwordResetCode: string) {
+    const user = await UserModel.findByIdAndUpdate(id, { passwordResetCode }, { new: true });
+    return user;
+}
+
+async function updatePassword(id: string, password: string) {
+    const user = await UserModel.findById(id);
+    user!.password = password;
+    user!.passwordResetCode = null;
+    await user!.save();
+    return user;
+}
+export default {
+    createUser,
+    findUserByEmail,
+    findUserById,
+    updateResetToken,
+    updatePassword
+};
